@@ -19,7 +19,7 @@ local_result <- fit_one_rep(
   beta_0 = 73, beta_1 = -0.04, beta_2 = 0.04, sigma_e = 12,
   log_AF = -0.90, alpha_AFT = 0.012,
   loglogistic_shape = 1.20, loglogistic_scale = 23,
-  visit = c(0, 1, seq(3, 92, 3)), n_patients = 1100, max_FU = 120,
+  visit = c(0, 1, seq(3, 92, 3)), n_patients = 300, max_FU = 120,
   lambda_c = -1, aft_mode = "loglogistic",
   models_to_fit = c("LMM", "bp2", "gp"),
   n_stan_chains = 4, n_stan_warmup = 1000, n_stan_iter = 1000
