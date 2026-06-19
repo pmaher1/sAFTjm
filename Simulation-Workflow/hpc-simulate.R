@@ -10,9 +10,9 @@ library(here) # file path management
 library(cmdstanr) # Stan interface
 
 # Stan model paths (passed as strings; each worker compiles from disk)
-stan_path_bp1 <- here("WPP","Stan", "JM", "Bernstein-Polynomials-JM-Hist.stan")
-stan_path_bp2 <- here("WPP","Stan", "JM", "bernstein-polynomials.stan")
-stan_path_gp <- here("WPP","Stan", "JM", "gaussian-process.stan")
+stan_path_bp1 <- here("Stan", "Bernstein-Polynomials-JM-Hist.stan")
+stan_path_bp2 <- here("Stan", "bernstein-polynomials.stan")
+stan_path_gp <- here("Stan", "gaussian-process.stan")
 
 ##########
 
@@ -59,7 +59,7 @@ Sys.setenv(SCENARIO_ID = scenario_id)
 
 # Source scenario parameters and simulation functions
 # (datagen.R reads SCENARIO_ID from the environment and sets sc, beta_2, log_AF, etc.)
-source(here("WPP", "Simulation-Workflow", "datagen.R"))
+source(here("Simulation-Workflow", "datagen.R"))
 
 # Minimal simulation settings
 n_sim <- 100  # replications (increase for production)
@@ -68,7 +68,7 @@ if (is.null(n_per_batch)) n_per_batch <- n_sim
 base_seed <- 32134
 
 # Output directory (scenario-specific subdirectory)
-results_dir <- here("WPP","Simulation-Workflow", "Results", scenario_id)
+results_dir <- here("Simulation-Workflow", "Results", scenario_id)
 dir.create(results_dir, showWarnings = FALSE, recursive = TRUE)
 
 ##########
@@ -167,7 +167,7 @@ message(sprintf(
 # Save batch output
 ##########
 
-out_file <- file.path(results_dir, sprintf("WPP-%s-%s-%03d.rds", scenario_id, aft_mode, batch_id))
+out_file <- file.path(results_dir, sprintf("sAFTjm-%s-%s-%03d.rds", scenario_id, aft_mode, batch_id))
 saveRDS(
   list(
     batch_id = batch_id,

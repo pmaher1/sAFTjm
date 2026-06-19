@@ -17,12 +17,7 @@ set.seed(global_seed)
 # Source data generation function
 # source(here("Programs", "Data-Gen-ENZAMET-01.R"))
 
-bunya <- TRUE
-if (bunya==TRUE){
-  source(here("WPP","Simulation-Workflow", "functions.R"))
-} else {
-  source(here("Simulation-Workflow", "functions.R"))
-}
+source(here("Simulation-Workflow", "functions.R"))
 
 ##########
 

@@ -7,9 +7,9 @@ global_seed <- 854098
 source(here("Simulation-Workflow", "functions.R")) # Sources 'functions' folder
 
 # Point to Stan files
-stan_path_bp1 <- here("Stan", "JM", "Bernstein-Polynomials-JM-Hist.stan")
-stan_path_bp2 <- here("Stan", "JM", "bernstein-polynomials.stan")
-stan_path_gp <- here("Stan", "JM", "gaussian-process.stan")
+stan_path_bp1 <- here("Stan", "Bernstein-Polynomials-JM-Hist.stan")
+stan_path_bp2 <- here("Stan", "bernstein-polynomials.stan")
+stan_path_gp <- here("Stan", "gaussian-process.stan")
 
 # Use the 'fit_one_rep' function from 'functions.R'. This function represents the fitting of the models for a given simulated dataset, parameters are specified.
 local_result <- fit_one_rep(

@@ -1,13 +1,13 @@
 #!/bin/bash
-#SBATCH --job-name=WPP-sim
+#SBATCH --job-name=sAFTjm-sim
 #SBATCH --array=1-500
 #SBATCH --exclude=bun091
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=6GB
 #SBATCH --time=06:00:00
-#SBATCH --output=WPP/Simulation-Workflow/Logs/task-%04a.out
-#SBATCH --error=WPP/Simulation-Workflow/Logs/task-%04a.err
+#SBATCH --output=Simulation-Workflow/Logs/task-%04a.out
+#SBATCH --error=Simulation-Workflow/Logs/task-%04a.err
 #SBATCH --mail-type=FAIL
 
 N_PER_BATCH=20
@@ -49,13 +49,15 @@ export MKL_NUM_THREADS=1
 export BLIS_NUM_THREADS=1
 export VECLIB_MAXIMUM_THREADS=1
 
-mkdir -p "${SLURM_SUBMIT_DIR}/WPP/Simulation-Workflow/Logs"
+mkdir -p "${SLURM_SUBMIT_DIR}/Simulation-Workflow/Logs"
 
 cd "${SLURM_SUBMIT_DIR}"
 
-Rscript WPP/Simulation-Workflow/hpc-simulate.R \
+Rscript Simulation-Workflow/hpc-simulate.R \
     ${BATCH_ID} \
     ${N_PER_BATCH} \
     ${N_WORKERS} \
+    LMM \
     bp2 \
+    gp \
     ${SCENARIO_ID}

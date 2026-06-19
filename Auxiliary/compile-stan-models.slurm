@@ -16,6 +16,6 @@ export OPENBLAS_NUM_THREADS=1
 export MKL_NUM_THREADS=1
 
 echo "Compiling Stan models..."
-Rscript ~/WPP/Simulation-Workflow/compile-stan-models.R
+Rscript Auxiliary/compile-stan-models.R
 echo "Done."
 

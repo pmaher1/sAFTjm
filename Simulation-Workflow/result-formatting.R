@@ -9,9 +9,8 @@ library(tidyverse) # data manipulation and plotting
 library(purrr) # for functional programming (e.g. map)
 library(tibble) # for tidy data frames
 
-# Creation of output directories for the writeup. The 'Writeup' folder correlated with where my LaTeX writeup was, however if one wishes to run for themselves they may remove the "Writeup" part of this directory.
-dir.create(here("Writeup", "figures"), showWarnings = FALSE, recursive = TRUE)
-dir.create(here("Writeup", "pictures"), showWarnings = FALSE, recursive = TRUE)
+dir.create(here("Figures"), showWarnings = FALSE, recursive = TRUE)
+dir.create(here("Pictures"), showWarnings = FALSE, recursive = TRUE)
 
 ##########
 
@@ -32,7 +31,7 @@ ph_scenario_dirs <- sort(grep("^s[0-9]+_(ll|wb)(_n[0-9]+)?_ph$",
                               all_scenario_dirs, value = TRUE, perl = TRUE))
 
 # Also check for default (loose) files in Results/ root
-default_files <- list.files(base_results_dir, pattern = "WPP-MWE-.*\\.rds",
+default_files <- list.files(base_results_dir, pattern = "sAFTjm-MWE-.*\\.rds",
                             full.names = TRUE, recursive = FALSE)
 
 scenario_list <- list()
@@ -66,7 +65,7 @@ if (length(scenario_dirs) > 0) {
     aft_mode <- scenario_aft_mode(base_sf)
     files <- sort(unlist(lapply(variants, function(sf) {
       list.files(here("Simulation-Workflow", "Results", sf),
-                 pattern = paste0("WPP-", base_sf, "-", aft_mode, "-.*\\.rds"),
+                 pattern = paste0("sAFTjm-", base_sf, "-", aft_mode, "-.*\\.rds"),
                  full.names = TRUE)
     })))
     if (length(files) > 0) {
@@ -84,7 +83,7 @@ if (length(ph_scenario_dirs) > 0) {
     aft_mode <- scenario_aft_mode(base_sf)
     files <- sort(list.files(
       here("Simulation-Workflow", "Results", sf),
-      pattern = paste0("WPP-", base_sf, "-", aft_mode, "-.*\\.rds"),
+      pattern = paste0("sAFTjm-", base_sf, "-", aft_mode, "-.*\\.rds"),
       full.names = TRUE
     ))
     if (length(files) > 0) {
@@ -648,15 +647,15 @@ if (run_standard_analysis) {
       )
       
       if (!is.null(mcmc_bulk_ess_histogram)) {
-        ggsave(filename = here("Writeup", "figures", paste0(out_prefix, "mcmc_bulk_ess_histograms.pdf")),
+        ggsave(filename = here("Figures", paste0(out_prefix, "mcmc_bulk_ess_histograms.pdf")),
                plot = mcmc_bulk_ess_histogram)
       }
       if (!is.null(mcmc_tail_ess_histogram)) {
-        ggsave(filename = here("Writeup", "figures", paste0(out_prefix, "mcmc_tail_ess_histograms.pdf")),
+        ggsave(filename = here("Figures", paste0(out_prefix, "mcmc_tail_ess_histograms.pdf")),
                plot = mcmc_tail_ess_histogram)
       }
       if (!is.null(mcmc_rhat_histogram)) {
-        ggsave(filename = here("Writeup", "figures", paste0(out_prefix, "mcmc_rhat_histograms.pdf")),
+        ggsave(filename = here("Figures", paste0(out_prefix, "mcmc_rhat_histograms.pdf")),
                plot = mcmc_rhat_histogram)
       }
     }
@@ -924,7 +923,7 @@ if (length(all_plot_data_combined) > 1) {
       plot.subtitle = element_text(hjust = 0.5, size = 15)
     )
   
-  ggsave(filename = here("Writeup", "figures", "cross_scenario_runtime_boxplot.pdf"),
+  ggsave(filename = here("Figures", "cross_scenario_runtime_boxplot.pdf"),
          plot = cross_scenario_runtime_boxplot)
   
   if (length(all_ic_combined) > 0) {
@@ -1024,7 +1023,7 @@ if (length(all_plot_data_combined) > 1) {
         plot.subtitle = element_text(hjust = 0.5, size = 15)
       )
     
-    ggsave(filename = here("Writeup", "figures", "cross_scenario_loo_waic_plot.pdf"),
+    ggsave(filename = here("Figures", "cross_scenario_loo_waic_plot.pdf"),
            plot = cross_scenario_loo_waic_plot)
   }
   
@@ -1232,7 +1231,7 @@ if (length(all_plot_data_combined) > 1) {
       plot.title = element_text(hjust = 0.5)
     )
   
-  ggsave(filename = here("Writeup", "figures", "cross_scenario_boxplot.pdf"),
+  ggsave(filename = here("Figures", "cross_scenario_boxplot.pdf"),
          plot = cross_scenario_boxplot)
   
   # Combined cross-scenario boxplot showing both BP and GP models side-by-side.
@@ -1277,7 +1276,7 @@ if (length(all_plot_data_combined) > 1) {
       plot.title = element_text(hjust = 0.5)
     )
   
-  ggsave(filename = here("Writeup", "figures", "cross_scenario_boxplot_combined.pdf"),
+  ggsave(filename = here("Figures", "cross_scenario_boxplot_combined.pdf"),
          plot = cross_scenario_boxplot_combined)
   
   scenario_specific_plot_data <- combined_plot_data
@@ -1344,9 +1343,9 @@ if (length(all_plot_data_combined) > 1) {
         plot.title = element_text(hjust = 0.5, size = 16)
       )
     
-    ggsave(filename = here("Writeup", "figures", paste0("scenario_", scenario_i, "_boxplot_combined.pdf")),
+    ggsave(filename = here("Figures", paste0("scenario_", scenario_i, "_boxplot_combined.pdf")),
            plot = scenario_boxplot_combined)
-    ggsave(filename = here("Writeup", "pictures", paste0("scenario_", scenario_i, "_boxplot_combined.pdf")),
+    ggsave(filename = here("Pictures", paste0("scenario_", scenario_i, "_boxplot_combined.pdf")),
            plot = scenario_boxplot_combined)
   }
   
@@ -1432,7 +1431,7 @@ if (length(all_plot_data_combined) > 1) {
         )
       
       sd_boxplot_file <- here(
-        "Writeup", "figures",
+        "Figures",
         paste0("scenario_", scenario_i, "_sd_boxplot_combined_with_truth.pdf")
       )
       ggsave(filename = sd_boxplot_file, plot = scenario_sd_boxplot_combined)

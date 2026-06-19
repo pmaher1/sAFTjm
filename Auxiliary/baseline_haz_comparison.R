@@ -5,6 +5,7 @@
 # Load relevant libraries
 library(here) # file path management
 library(tidyverse) # data manipulation and plotting
+dir.create(here("Figures"), showWarnings = FALSE, recursive = TRUE)
 
 ##########
 
@@ -232,7 +233,7 @@ ll_combined_plot <- cowplot::plot_grid(ll_H0_plot, ll_h0_plot, ncol = 2)
 ll_combined_plot
 
 ggsave(
-  here("Writeup", "figures", "log_logistic_baseline_hazard.pdf"),
+  here("Figures", "log_logistic_baseline_hazard.pdf"),
   ll_combined_plot,
   width = 14,
   height = 6
@@ -269,7 +270,7 @@ wb_combined_plot <- cowplot::plot_grid(wb_H0_plot, wb_h0_plot, ncol = 2)
 wb_combined_plot
 
 ggsave(
-  here("Writeup", "figures", "weibull_baseline_hazard.pdf"),
+  here("Figures", "weibull_baseline_hazard.pdf"),
   wb_combined_plot,
   width = 14,
   height = 6
@@ -315,7 +316,7 @@ if (nrow(fit_baseline_df) > 0) {
   fit_combined_plot <- cowplot::plot_grid(fit_H0_plot, fit_h0_plot, ncol = 2)
   fit_combined_plot
   
-  ggsave(here("Writeup","figures", "bp_gp_reconstructed_baseline_hazard.pdf"), fit_combined_plot, width = 12, height = 6)
+  ggsave(here("Figures", "bp_gp_reconstructed_baseline_hazard.pdf"), fit_combined_plot, width = 12, height = 6)
 } else {
   warning(
     "Could not reconstruct BP/GP fitted baseline hazards from the sampled RDS outputs. ",
