@@ -26,20 +26,27 @@ local_result <- fit_one_rep(
 )
 
 # Summary formatting function for clean summary description
-format_summary <- function(summary_tbl, y_mean = 0) {
+format_summary <- function(summary_tbl, y_mean = 0, model = c("bp", "gp")) {
+  model <- match.arg(model)
   if (is.null(summary_tbl)) return(NULL)
+
+  surv_var <- if (model == "gp") "gamma[1]" else "beta_surv[1]"
+
   summary_tbl %>%
-    filter(variable %in% c("beta_long[1]", "beta_long[2]", "beta_long[3]",
-                           "beta_surv[1]", "gamma[1]", "alpha")) %>%
+    filter(variable %in% c(
+      "beta_long[1]", "beta_long[2]", "beta_long[3]",
+      surv_var, "alpha"
+    )) %>%
     mutate(
-      parameter = recode(variable,
-                         `beta_long[1]` = "beta_0",
-                         `beta_long[2]` = "beta_1",
-                         `beta_long[3]` = "beta_2",
-                         `beta_surv[1]` = "gamma",
-                         `gamma[1]` = "gamma",
-                         alpha = "alpha"),
-      mean = if_else(variable == "beta_long[1]", mean + y_mean, mean), # Adding back the longitudinal mean from centring
+      parameter = case_when(
+        variable == "beta_long[1]" ~ "beta_0",
+        variable == "beta_long[2]" ~ "beta_1",
+        variable == "beta_long[3]" ~ "beta_2",
+        variable == surv_var       ~ "gamma",
+        variable == "alpha"        ~ "alpha",
+        TRUE                       ~ variable
+      ),
+      mean = if_else(variable == "beta_long[1]", mean + y_mean, mean),
       q2.5 = if_else(variable == "beta_long[1]", q2.5 + y_mean, q2.5),
       q97.5 = if_else(variable == "beta_long[1]", q97.5 + y_mean, q97.5)
     ) %>%
@@ -61,8 +68,8 @@ lmm_summary <- local_result$LMM$summary %>%
 # Direct comparison of results of models
 result_comparison <- bind_rows(
   LMM = lmm_summary,
-  BP = format_summary(local_result$bp2$summary, local_result$Y_long_mean),
-  GP = format_summary(local_result$gp$summary, local_result$Y_long_mean),
+  BP = format_summary(local_result$bp2$summary, local_result$Y_long_mean, model = "bp"),
+  GP = format_summary(local_result$gp$summary, local_result$Y_long_mean, model = "gp"),
   .id = "model"
 )
 
