@@ -10,6 +10,8 @@ This repository contains the simulation and analysis code used to compare:
 - `gp`: the Gaussian-process sAFT joint model.
 - `jm2`: an optional proportional-hazards joint model fit with `JMbayes2`.
 
+Note that the original Bernstein polynomial formulation (`bp1`) refers to the Bernstein polynomial formulation implemented prior to this project. This was not directly ran in the Workplace Project Report, however is included here to give reference about it's construction.
+
 ## Directory Layout
 
 - `Simulation-Workflow/`: data generation, model fitting, HPC batch execution, and result formatting.
