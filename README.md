@@ -12,14 +12,18 @@ This repository contains the simulation and analysis code used to compare:
 
 Note that the original Bernstein polynomial formulation (`bp1`) refers to the Bernstein polynomial formulation implemented prior to this project. This was not presented in the Workplace Project Report, however is included here to give reference about it's construction.
 
+---
+
 ## Directory Layout
 
 - `Simulation-Workflow/`: data generation, model fitting, HPC batch execution, and result formatting.
 - `Auxiliary/`: supporting scripts for Stan compilation and baseline-hazard plots.
 - `Stan/`: Stan model files for the BP and GP sAFT joint models.
-- `local-fit.R`: single-replicate local runner for checking that the LMM, BP, and GP workflow runs outside the HPC array.
+- `local-fit.R`: single-replicate local runner for checking that the LMM, BP, and GP workflow runs outside the HPC array. Currently fitting on a n=300 simulation.
 
 Run scripts from this `sAFTjm-main/` project root. Generated outputs stay inside this folder, with simulation results and logs under `Simulation-Workflow/`, plots under `Figures/`, and non-figure images under `Pictures/`.
+
+---
 
 ## Typical Workflow
 
@@ -29,3 +33,67 @@ Run scripts from this `sAFTjm-main/` project root. Generated outputs stay inside
 4. Summarise completed `.rds` outputs with `Simulation-Workflow/result-formatting.R`.
 
 See the READMEs in `Simulation-Workflow/` and `Auxiliary/` for file-level details.
+
+---
+
+## Required packages
+
+The required R packages include:
+
+* `cmdstanr`
+* `tidyverse`
+* `here`
+* `survival`
+* `nlme`
+* `MASS`
+* `future`
+* `furrr`
+* `parallelly`
+* `JMbayes2`
+* `posterior`
+* `loo`
+* `simsurv`
+* `rstan`
+* `brms`
+
+These packages may be installed by running:
+
+```r
+install.packages(c(
+  "tidyverse",
+  "here",
+  "survival",
+  "nlme",
+  "MASS",
+  "future",
+  "furrr",
+  "parallelly",
+  "JMbayes2",
+  "posterior",
+  "loo",
+  "simsurv",
+  "rstan",
+  "brms"
+))
+```
+
+For `cmdstanr`, install the R package from the Stan r-universe:
+
+```r
+install.packages(
+  "cmdstanr",
+  repos = c("https://stan-dev.r-universe.dev", getOption("repos"))
+)
+```
+
+Then install CmdStan itself:
+
+```r
+cmdstanr::install_cmdstan()
+```
+
+---
+
+## Other points to note
+
+- There are common `cmdstanr` warnings at the beginning of sampling for each chain, warning about the Cholesky decomposition, stating `Exception: lkj_corr_cholesky_lpdf: Random variable[2] is 0, but must be positive!`. This is not of concern and is expected, this is normal for early MCMC warm-up samples and does not impact parameter estimate.
