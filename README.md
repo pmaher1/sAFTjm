@@ -1,6 +1,6 @@
 # sAFTjm
 
-Joint modelling of longitudinal and time-to-event outcomes with semiparametric accelerated failure time joint models.
+Repository for BCA Workplace Project: "Bayesian Semiparametric AFT Joint Modelling for HRQoL and PFS", comprising of the key files used within the simulation study.
 
 This repository contains the simulation and analysis code used to compare:
 
