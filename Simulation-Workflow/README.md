@@ -1,6 +1,6 @@
 # Simulation Workflow
 
-This directory contains the main simulation pipeline for the sAFT joint-model comparison.
+This directory contains the main simulation pipeline for the sAFT joint-model comparison. Note that this was constructed for alignment with high-performance computing (HPC), in particular UQ's HPC system [Bunya](https://rcc.uq.edu.au/systems/high-performance-computing/bunya).
 
 ## Files
 
