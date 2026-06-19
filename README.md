@@ -17,7 +17,7 @@ This repository contains the simulation and analysis code used to compare:
 - `Stan/`: Stan model files for the BP and GP sAFT joint models.
 - `local-fit.R`: single-replicate local runner for checking that the LMM, BP, and GP workflow runs outside the HPC array.
 
-Run scripts from this `sAFTjm-main/` project root. The `.here` file anchors `here()` paths at this directory. Generated outputs stay inside this folder, with simulation results and logs under `Simulation-Workflow/`, plots under `Figures/`, and non-figure images under `Pictures/`.
+Run scripts from this `sAFTjm-main/` project root. Generated outputs stay inside this folder, with simulation results and logs under `Simulation-Workflow/`, plots under `Figures/`, and non-figure images under `Pictures/`.
 
 ## Typical Workflow
 
