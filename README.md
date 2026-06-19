@@ -1,4 +1,4 @@
-# sAFTjm
+# sAFTjm: Bayesian Semiparametric AFT Joint Modelling for HRQoL and PFS
 
 Repository for BCA Workplace Project: "Bayesian Semiparametric AFT Joint Modelling for HRQoL and PFS", comprising of the key files used within the simulation study.
 
