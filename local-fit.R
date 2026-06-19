@@ -13,7 +13,7 @@ stan_path_gp <- here("Stan", "gaussian-process.stan")
 
 # Use the 'fit_one_rep' function from 'functions.R'. This function represents the fitting of the models for a given simulated dataset, parameters are specified.
 local_result <- fit_one_rep(
-  rep_local_idx = 1, batch_id = 1, n_per_batch = 1, base_seed = global_seed - 1,
+  rep_local_idx = 1, batch_id = 1, n_per_batch = 1, base_seed = global_seed,
   stan_path_bp1 = stan_path_bp1, stan_path_bp2 = stan_path_bp2, stan_path_gp = stan_path_gp,
   D = matrix(c(15^2, -0.10 * 15 * 0.20, -0.10 * 15 * 0.20, 0.20^2), 2, 2),
   beta_0 = 73, beta_1 = -0.04, beta_2 = 0.04, sigma_e = 12,
