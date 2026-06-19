@@ -42,9 +42,9 @@ format_summary <- function(summary_tbl, y_mean = 0, model = c("bp", "gp")) {
         variable == "beta_long[1]" ~ "beta_0",
         variable == "beta_long[2]" ~ "beta_1",
         variable == "beta_long[3]" ~ "beta_2",
-        variable == surv_var       ~ "gamma",
-        variable == "alpha"        ~ "alpha",
-        TRUE                       ~ variable
+        variable == surv_var ~ "gamma",
+        variable == "alpha" ~ "alpha",
+        TRUE ~ variable
       ),
       mean = if_else(variable == "beta_long[1]", mean + y_mean, mean),
       q2.5 = if_else(variable == "beta_long[1]", q2.5 + y_mean, q2.5),
